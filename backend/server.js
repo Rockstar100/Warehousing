@@ -6,8 +6,13 @@ const { Pool } = require('pg');
 const app = express();
 const port = 3001;
 
-// Use CORS middleware
-app.use(cors()); // Add this line
+// CORS configuration
+app.use(cors({
+  origin: ['https://sku-management-app.netlify.app', 'http://localhost:3000'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
+}));
 
 const pool = new Pool({
   user: process.env.DB_USER,
@@ -31,6 +36,11 @@ pool.connect((err, client, release) => {
 
 // Middleware to parse JSON
 app.use(express.json());
+
+//app running
+app.get('/', (req, res) => {
+  res.send('Server is running');
+});
 
 // Fetch all product metrics
 app.get('/product_metrics', async (req, res) => {
