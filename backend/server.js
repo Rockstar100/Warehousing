@@ -8,7 +8,7 @@ const port = 3001;
 
 // CORS configuration
 app.use(cors({
-  origin: ['https://sku-management-app.netlify.app', 'http://localhost:3000'],
+  origin: ['https://sku-management-webapp.windsurf.build', 'https://warehousing-z9wl.onrender.com', 'http://localhost:3000'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
