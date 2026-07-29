@@ -1,24 +1,35 @@
-# Warehousing — SKU & Product Margin Manager
+# Warehousing — Seleric Inventory & Procurement Suite
 
-A full-stack CRUD app for tracking product SKUs and per-unit profit margins, built on a Next.js admin dashboard with an Express/PostgreSQL API.
+A full-stack operations dashboard for tracking inventory, procurement, and receiving across a product catalog, built on a Next.js admin UI with an Express/PostgreSQL API.
 
 Live demo: frontend on Windsurf ([sku-management-webapp.windsurf.build](https://sku-management-webapp.windsurf.build)) · backend on Render ([warehousing-z9wl.onrender.com](https://warehousing-z9wl.onrender.com))
 
 ## What it does
 
-The core feature is the **SKU List** page: a data table for managing product SKUs with their selling price, per-bottle cost, and net margin (auto-calculated as selling price − cost). It supports:
+The app (branded **Seleric**) is organized around a sidebar of operational modules:
 
-- Create / edit / delete SKUs through a modal form, with a confirmation step before delete
-- Client-side search across all columns and sortable columns
-- Pagination with configurable page size
-- Toast notifications for success/failure on every API call
-- A REST backend (Express + `pg`) persisting SKU records to PostgreSQL, with the usual CRUD endpoints under `/product_metrics`
+- **Dashboard** — landing overview
+- **Application**
+  - **Product Spend Summary**
+  - **P&L**
+  - **Procurement** — searchable/filterable product list (status: Approved/Rejected, price category, variants, selling price, COGS, and MOQ), with view/edit/delete actions and an "Add New Product" flow
+  - **Entity Report**
+  - **User Management**
+  - **Customer Data**
+  - **Shipping**
+- **Content Generator**
+  - **Content Craft**
+- **Inventory Management**
+  - **Receiving Management** — Purchase Request, To Be Delivered, Quality Check, Receipt Details, and Vendor Spend Summary tabs; Receipt Details tracks PR number, company, order/delivery dates, invoiced/sorted/damaged quantities per product
+  - **Stock Management** — searchable inventory table by product/variant/SKU, with stock-level and sort filters, showing available/committed/net-available quantities and in-stock/out-of-stock status
+  - **Sales Report**
+  - **Manage Masters**
 
-Everything else in the `frontend/` app (dashboard widgets, invoices, kanban, chat, calendar, form components, etc.) comes from the open-source Next.js admin dashboard template this project was scaffolded from — those routes exist in the codebase but aren't wired into the app's sidebar navigation and aren't part of the actual product. The template's default dashboard (with placeholder "Total Users" / "Total Subscription" stats) is still the home page.
+A REST backend (Express + `pg`) persists records to PostgreSQL, with CRUD endpoints under `/product_metrics`.
 
 ## Tech stack
 
-**Frontend** — Next.js 15 (App Router), React 18, Bootstrap 5 / Ant Design, Axios, react-toastify, react-modal, ApexCharts (unused by the SKU feature, part of the template)
+**Frontend** — Next.js 15 (App Router), React 18, Bootstrap 5 / Ant Design, Axios, react-toastify, react-modal, ApexCharts
 
 **Backend** — Node.js, Express 5, `pg` (node-postgres), CORS, dotenv
 
@@ -36,11 +47,11 @@ Warehousing/
 │   └── Procfile
 └── frontend/
     └── src/
-        ├── app/Sku-List/          # The SKU management route
+        ├── app/Sku-List/          # SKU management route
         ├── components/SkuTableDataLayer.jsx   # SKU table: search, sort, pagination, CRUD modal
         ├── api/api.js             # Axios client for the backend
         ├── config.js              # API base URL (env override or Render URL)
-        └── masterLayout/          # Shared admin layout/sidebar (from the WowDash template)
+        └── masterLayout/          # Shared admin layout/sidebar
 ```
 
 ## Running it locally
@@ -64,14 +75,18 @@ npm install
 npm run dev   # http://localhost:3000
 ```
 
-Set `REACT_APP_API_BASE_URL` if the backend isn't running at the default (it falls back to the deployed Render URL). Navigate to `/Sku-List` for the actual feature — the home page (`/`) is the template's default demo dashboard.
+Set `REACT_APP_API_BASE_URL` if the backend isn't running at the default (it falls back to the deployed Render URL).
 
 ## Screenshots
 
-**SKU List** — search, sort, pagination, and add/edit/delete for product SKUs (shown here with no backend connected, hence the empty-state toast):
+**Stock Management** — inventory table with search, stock-level/sort filters, and available/committed/net-available quantities per product/variant:
 
-![SKU List](screenshots/sku-list.png)
+![Stock Management](screenshots/stock-management.png)
 
-**Default dashboard** — unmodified WowDash template landing page:
+**Procurement** — product catalog with status, price category, variants, selling price/COGS ranges, and MOQ:
 
-![Dashboard](screenshots/dashboard.png)
+![Procurement](screenshots/procurement.png)
+
+**Receiving Management** — receipt details by purchase request, tracking company, order/delivery dates, and invoiced/sorted/damaged quantities:
+
+![Receiving Management](screenshots/receiving-management.png)
