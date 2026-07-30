@@ -4,6 +4,7 @@ A full-stack operations dashboard for tracking inventory, procurement, and recei
 
 Live demo: frontend on Windsurf ([sku-management-webapp.windsurf.build](https://sku-management-webapp.windsurf.build)) · backend on Render ([warehousing-z9wl.onrender.com](https://warehousing-z9wl.onrender.com))
 
+
 ## What it does
 
 The app (branded **Seleric**) is organized around a sidebar of operational modules:
