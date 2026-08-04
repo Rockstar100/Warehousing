@@ -90,4 +90,6 @@ Set `REACT_APP_API_BASE_URL` if the backend isn't running at the default (it fal
 
 **Receiving Management** — receipt details by purchase request, tracking company, order/delivery dates, and invoiced/sorted/damaged quantities:
 
-![Receiving Management](screenshots/receiving-management.png)
+![Dashboard](screenshots/dashboard.png)
+
+
