@@ -75,3 +75,5 @@ Set `REACT_APP_API_BASE_URL` if the backend isn't running at the default (it fal
 **Default dashboard** — unmodified WowDash template landing page:
 
 ![Dashboard](screenshots/dashboard.png)
+
+
